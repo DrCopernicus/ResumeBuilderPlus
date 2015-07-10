@@ -1,0 +1,9 @@
+\clearpage
+
+\recipient{HR Departmnet}{Corporation\\123 Pleasant Lane\\12345 City, State}
+\date{\today}
+\opening{Dear Sir or Madam,}
+\closing{Sincerly,}
+\enclosure[Attached]{r\'esum\'e}
+
+\makelettertitle

@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ResumeBuilderPlus.UI.ProjectsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="clr-namespace:ResumeBuilderPlus.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <ListView HorizontalContentAlignment="Stretch" DataContext="{Binding Resume}" ItemsSource="{Binding Projects, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Padding="-1">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <DockPanel>
+                            <WrapPanel>
+                                <Button Command="{Binding RemoveCommand}" Width="25">-</Button>
+                                <ui:LockableCheckbox/>
+                                <TextBox Text="{Binding Years, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                                <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                                <TextBlock Text=" at "/>
+                                <TextBox Text="{Binding Institution, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                            </WrapPanel>
+                            <ui:TagControl DockPanel.Dock="Right" />
+                            <TextBlock />
+                        </DockPanel>
+                        <StackPanel>
+                            <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding Description}" Margin="25,0,0,0" BorderThickness="0" Padding="-1">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel>
+                                            <WrapPanel>
+                                                <Button Command="{Binding RemoveCommand}" Width="25">-</Button>
+                                                <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                                            </WrapPanel>
+                                            <ui:TagControl DockPanel.Dock="Right" />
+                                            <TextBlock />
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <Button Command="{Binding Description.AddCommand}" Margin="26,0,0,0" Width="25" HorizontalAlignment="Left">+</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Command="{Binding AddProjectCommand}" Width="25" HorizontalAlignment="Left" Margin="1,0,0,0">+</Button>
+    </StackPanel>
+</UserControl>
