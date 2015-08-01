@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using ResumeBuilderPlus.Qualifiers;
+using ResumeBuilderPlus.Qualifiers.Collections;
 using ResumeBuilderPlus.VVM;
 
 namespace ResumeBuilderPlus.Resumes
@@ -52,9 +53,9 @@ namespace ResumeBuilderPlus.Resumes
 
     public class Resume : ObservableObject
     {
-        private ObservableCollection<Education> _education = new ObservableCollection<Education>();
- 
-        public ObservableCollection<Education> Education
+        private ManipulatableCollection<Education> _education = new ManipulatableCollection<Education>();
+
+        public ManipulatableCollection<Education> Education
         {
             get { return _education; }
             set
@@ -64,26 +65,38 @@ namespace ResumeBuilderPlus.Resumes
             }
         }
 
-        private ObservableCollection<Cvitem> _skills = new ObservableCollection<Cvitem>();
+        private ManipulatableCollection<Experience> _experience = new ManipulatableCollection<Experience>();
 
-        public ObservableCollection<Cvitem> Skills
+        public ManipulatableCollection<Experience> Experience
         {
-            get { return _skills; }
+            get { return _experience; }
             set
             {
-                _skills = value;
+                _experience = value;
                 OnPropertyChanged();
             }
         }
 
-        private ObservableCollection<Project> _projects = new ObservableCollection<Project>();
+        private ManipulatableCollection<Project> _projects = new ManipulatableCollection<Project>();
 
-        public ObservableCollection<Project> Projects
+        public ManipulatableCollection<Project> Projects
         {
             get { return _projects; }
             set
             {
                 _projects = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ManipulatableCollection<Cvitem> _skills = new ManipulatableCollection<Cvitem>();
+
+        public ManipulatableCollection<Cvitem> Skills
+        {
+            get { return _skills; }
+            set
+            {
+                _skills = value;
                 OnPropertyChanged();
             }
         }
@@ -145,13 +158,12 @@ namespace ResumeBuilderPlus.Resumes
 
         public string ToString(IEnumerable<string> relevantTags)
         {
-            string body = Parse(CvobjectType.Cventry, Format, Education, relevantTags, "Education") + ParseCvitems(Skills, Format, "Skills") + Parse(CvobjectType.Cvitem, Format, Projects, relevantTags, "Projects");
             string ending;
             using (StreamReader r = new StreamReader("ending.txt"))
             {
                 ending = r.ReadToEnd();
             }
-            return "\\documentclass[11pt,a4paper,sans]{moderncv}\n\\moderncvstyle{classic}\n"
+            return "\\documentclass[11pt,a4paper,sans]{moderncv}\n\\moderncvstyle{" + Format.SelectedLayoutStyle + "}\n"
                 + "\\definecolor{color0}{RGB}{" + Format.Color0.R + "," + Format.Color0.G + "," + Format.Color0.B + "}\n"
                 + "\\definecolor{color1}{RGB}{" + Format.Color1.R + "," + Format.Color1.G + "," + Format.Color1.B + "}\n"
                 + "\\definecolor{color2}{RGB}{" + Format.Color2.R + "," + Format.Color2.G + "," + Format.Color2.B + "}\n"
@@ -165,7 +177,10 @@ namespace ResumeBuilderPlus.Resumes
                 + (PersonalInfo.PhoneDisplay ? "\\phone{" + PersonalInfo.Phone + "}\n" : "")
                 + (PersonalInfo.EmailDisplay ? "\\email{" + PersonalInfo.Email + "}\n" : "")
                 + "\\makecvtitle\n"
-                + body + "\n"
+                + Parse(CvobjectType.Cventry, Format, Education, relevantTags, "Education") + "\n"
+                + Parse(CvobjectType.Cventry, Format, Experience, relevantTags, "Experience") + "\n"
+                + Parse(CvobjectType.Cvitem, Format, Projects, relevantTags, "Projects") + "\n"
+                + ParseCvitems(Skills, Format, "Skills") + "\n"
                 + ending + "\n"
                 + CoverLetter.Text + "\n"
                 + "\\makeletterclosing\n"

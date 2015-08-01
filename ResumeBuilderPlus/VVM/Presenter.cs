@@ -63,44 +63,9 @@ namespace ResumeBuilderPlus.VVM
             Resume.CoverLetter.Text += SelectedTemplate.ToString();
         }
 
-        public ICommand AddEducationCommand
-        {
-            get { return new DelegateCommand(AddEducation); }
-        }
-
-        public void AddEducation()
-        {
-            Resume.Education.Add(new Education() { Parent = Resume.Education });
-        }
-
-        public ICommand AddProjectCommand
-        {
-            get { return new DelegateCommand(AddProject); }
-        }
-
-        public void AddProject()
-        {
-            Resume.Projects.Add(new Project() { Parent = Resume.Projects });
-        }
-
-        public ICommand AddSkillCommand
-        {
-            get { return new DelegateCommand(AddSkill); }
-        }
-
-        public void AddSkill()
-        {
-            Resume.Skills.Add(new Cvitem() { Parent = Resume.Skills });
-        }
-        
         public ICommand WriteCommand
         {
             get { return new DelegateCommand(Write); }
-        }
-
-        public Presenter()
-        {
-            Load();
         }
 
         public void Write()
@@ -164,6 +129,32 @@ namespace ResumeBuilderPlus.VVM
             }
         }
 
+        public ICommand SelectAllTagsCommand
+        {
+            get { return new DelegateCommand(SelectAllTags); }
+        }
+
+        public void SelectAllTags()
+        {
+            foreach (var tag in ParsedTags)
+            {
+                tag.Bool = true;
+            }
+        }
+
+        public ICommand DeselectAllTagsCommand
+        {
+            get { return new DelegateCommand(DeselectAllTags); }
+        }
+
+        public void DeselectAllTags()
+        {
+            foreach (var tag in ParsedTags)
+            {
+                tag.Bool = false;
+            }
+        }
+
         private string _jobRequirements = "";
 
         public string JobRequirements
@@ -181,6 +172,11 @@ namespace ResumeBuilderPlus.VVM
         public ObservableCollection<StringAndBool> ParsedTags
         {
             get { return _parsedTags; }
+        }
+
+        public Presenter()
+        {
+            Load();
         }
     }
 }

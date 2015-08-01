@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ResumeBuilderPlus.UI.ProjectsControl"
+﻿<UserControl x:Class="ResumeBuilderPlus.UI.ExperienceControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,9 @@
              xmlns:ui="clr-namespace:ResumeBuilderPlus.UI"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
     <StackPanel>
-        <ListView HorizontalContentAlignment="Stretch" DataContext="{Binding Resume}" ItemsSource="{Binding Projects, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Padding="-1">
+        <ListView HorizontalContentAlignment="Stretch" DataContext="{Binding Resume}" ItemsSource="{Binding Experience, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Padding="-1">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Padding" Value="0"/>
@@ -28,11 +29,11 @@
                             <ui:TagControl DockPanel.Dock="Right" />
                             <TextBlock />
                         </DockPanel>
-                        <ui:DescriptionList DataContext="{Binding Description}"/>
+                        <ui:DescriptionList/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Command="{Binding Resume.Projects.AddCommand}" Width="25" HorizontalAlignment="Left" Margin="1,0,0,0">+</Button>
+        <Button Command="{Binding Resume.Experience.AddCommand}" Width="25" HorizontalAlignment="Left" Margin="1,0,0,0">+</Button>
     </StackPanel>
 </UserControl>

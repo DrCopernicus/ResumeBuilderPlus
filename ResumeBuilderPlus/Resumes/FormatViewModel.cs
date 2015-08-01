@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Media;
 using Newtonsoft.Json;
 using ResumeBuilderPlus.VVM;
 
@@ -68,6 +69,42 @@ namespace ResumeBuilderPlus.Resumes
             set
             {
                 _borders = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _projectYearsNewline = false;
+
+        public bool ProjectYearsNewline
+        {
+            get { return _projectYearsNewline; }
+            set
+            {
+                _projectYearsNewline = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        private readonly ObservableCollection<string> _layoutStyles = new ObservableCollection<string>()
+        {
+            "casual", "classic", "oldstyle", "banking"
+        };
+
+        [JsonIgnore]
+        public ObservableCollection<string> LayoutStyles
+        {
+            get { return _layoutStyles; }
+        }
+
+        private string _selectedLayoutStyle = "classic";
+
+        public string SelectedLayoutStyle
+        {
+            get { return _selectedLayoutStyle; }
+            set
+            {
+                _selectedLayoutStyle = value;
                 OnPropertyChanged();
             }
         }

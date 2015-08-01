@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ResumeBuilderPlus.UI.DescriptionList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="clr-namespace:ResumeBuilderPlus.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <StackPanel>
+        <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding ., UpdateSourceTrigger=PropertyChanged}" Margin="25,0,0,0" BorderThickness="0" Padding="-1">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <WrapPanel>
+                            <Button Command="{Binding RemoveCommand}" Width="25">-</Button>
+                            <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                        </WrapPanel>
+                        <ui:TagControl DockPanel.Dock="Right" />
+                        <TextBlock />
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Command="{Binding AddCommand}" Margin="26,0,0,0" Width="25" HorizontalAlignment="Left">+</Button>
+    </StackPanel>
+</UserControl>

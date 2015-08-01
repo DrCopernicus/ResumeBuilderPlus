@@ -28,33 +28,12 @@
                             <TextBox Text="{Binding Localization, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
                             <TextBlock Text=")"/>
                         </WrapPanel>
-                        <StackPanel>
-                            <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Margin="25,0,0,0" BorderThickness="0" Padding="-1">
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="ListBoxItem">
-                                        <Setter Property="Padding" Value="0"/>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <DockPanel>
-                                            <WrapPanel>
-                                                <Button Command="{Binding RemoveCommand}" Width="25">-</Button>
-                                                <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
-                                            </WrapPanel>
-                                            <ui:TagControl DockPanel.Dock="Right" />
-                                            <TextBlock />
-                                        </DockPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                            <Button Command="{Binding Description.AddCommand}" Margin="26,0,0,0" Width="25" HorizontalAlignment="Left">+</Button>
-                        </StackPanel>
+                        <ui:DescriptionList DataContext="{Binding Description}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Command="{Binding AddEducationCommand}" Width="25" HorizontalAlignment="Left" Margin="1,0,0,0">+</Button>
+        <Button Command="{Binding Resume.Education.AddCommand}" Width="25" HorizontalAlignment="Left" Margin="1,0,0,0">+</Button>
     </StackPanel>
     
 </UserControl>

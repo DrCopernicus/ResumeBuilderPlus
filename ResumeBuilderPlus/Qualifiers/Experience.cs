@@ -10,7 +10,7 @@ using ResumeBuilderPlus.VVM;
 
 namespace ResumeBuilderPlus.Qualifiers
 {
-    public class Project : Cvobject, IParentable<Project>
+    public class Experience : Cvobject, IParentable<Experience>
     {
         private string _years = "";
 
@@ -72,6 +72,12 @@ namespace ResumeBuilderPlus.Qualifiers
             }
         }
 
+        public override bool IsRelevant(IEnumerable<string> relevantTags)
+        {
+            return Locked == true || ((Tags.Any(tag => relevantTags.Contains(tag.Text)) ||
+                Description.SelectMany(desc => desc.Tags).Any(tag => relevantTags.Contains(tag.Text))) && Locked == null);
+        }
+
         public override string ToString(CvobjectType type, FormatViewModel format)
         {
             switch (type)
@@ -85,13 +91,7 @@ namespace ResumeBuilderPlus.Qualifiers
             }
         }
 
-        public override bool IsRelevant(IEnumerable<string> relevantTags)
-        {
-            return Locked == true || ((Tags.Any(tag => relevantTags.Contains(tag.Text)) ||
-                Description.SelectMany(desc => desc.Tags).Any(tag => relevantTags.Contains(tag.Text))) && Locked == null);
-        }
-
-        public ObservableCollection<Project> Parent { get; set; }
+        public ObservableCollection<Experience> Parent { get; set; }
         public ICommand RemoveCommand { get {return new DelegateCommand(RemoveFromCommand);} }
         public void RemoveFromCommand()
         {

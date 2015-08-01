@@ -81,6 +81,7 @@
     <Compile Include="Qualifiers\Cvobject.cs" />
     <Compile Include="Qualifiers\Descriptors\Description.cs" />
     <Compile Include="Qualifiers\Education.cs" />
+    <Compile Include="Qualifiers\Experience.cs" />
     <Compile Include="Qualifiers\IParentable.cs" />
     <Compile Include="Qualifiers\Project.cs" />
     <Compile Include="Qualifiers\Descriptors\Tag.cs" />
@@ -88,8 +89,14 @@
     <Compile Include="Resumes\Formatter.cs" />
     <Compile Include="Resumes\Personal.cs" />
     <Compile Include="Resumes\Resume.cs" />
+    <Compile Include="UI\DescriptionList.xaml.cs">
+      <DependentUpon>DescriptionList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\EducationControl.xaml.cs">
       <DependentUpon>EducationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ExperienceControl.xaml.cs">
+      <DependentUpon>ExperienceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\InsertTemplateTextDialog.xaml.cs">
       <DependentUpon>InsertTemplateTextDialog.xaml</DependentUpon>
@@ -112,7 +119,15 @@
     <Compile Include="VVM\Presenter.cs" />
     <Compile Include="VVM\SelectionBindingTextBox.cs" />
     <Compile Include="VVM\TemplatedString.cs" />
+    <Page Include="UI\DescriptionList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\EducationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ExperienceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
