@@ -21,10 +21,10 @@
                             <WrapPanel>
                                 <Button Command="{Binding RemoveCommand}" Width="25">-</Button>
                                 <ui:LockableCheckbox/>
-                                <TextBox Text="{Binding Years, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
-                                <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                                <TextBox ui:CueBannerService.CueBanner="Years" Text="{Binding Years, UpdateSourceTrigger=PropertyChanged}" MinWidth="30"/>
+                                <TextBox ui:CueBannerService.CueBanner="Title" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" MinWidth="30"/>
                                 <TextBlock Text=" at "/>
-                                <TextBox Text="{Binding Institution, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                                <TextBox ui:CueBannerService.CueBanner="Institution" Text="{Binding Institution, UpdateSourceTrigger=PropertyChanged}" MinWidth="60"/>
                             </WrapPanel>
                             <ui:TagControl DockPanel.Dock="Right" />
                             <TextBlock />

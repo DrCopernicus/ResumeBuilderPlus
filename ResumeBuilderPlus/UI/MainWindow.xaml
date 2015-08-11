@@ -92,7 +92,9 @@
                             <Button Grid.Column="1" Command="{Binding SelectAllTagsCommand}">Select All</Button>
                             <Button Grid.Column="2" Command="{Binding DeselectAllTagsCommand}">Deselect All</Button>
                         </Grid>
-                        <TextBox TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding JobRequirements, UpdateSourceTrigger=PropertyChanged}"/>
+                        <AdornerDecorator>
+                            <TextBox TextWrapping="Wrap" AcceptsReturn="True" ui:CueBannerService.CueBanner="Job description/relevant information" Text="{Binding JobRequirements, UpdateSourceTrigger=PropertyChanged}"/>
+                        </AdornerDecorator>
                     </DockPanel>
                     
                     <ListView Grid.Column="1" ItemsSource="{Binding ParsedTags, UpdateSourceTrigger=PropertyChanged}">
@@ -110,7 +112,9 @@
             <TabItem Header="Cover Letter">
                 <DockPanel>
                     <Button DockPanel.Dock="Bottom" Click="ButtonBase_OnClick">Insert from template</Button>
-                    <vvm:SelectionBindingTextBox TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Resume.CoverLetter.Text}"/>
+                    <AdornerDecorator>
+                        <vvm:SelectionBindingTextBox TextWrapping="Wrap" AcceptsReturn="True" ui:CueBannerService.CueBanner="Cover letter" Text="{Binding Resume.CoverLetter.Text}"/>
+                    </AdornerDecorator>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Formatting" DataContext="{Binding Resume.Format}">

@@ -19,7 +19,7 @@
                     <DockPanel>
                         <WrapPanel>
                             <Button Command="{Binding RemoveCommand}" Width="25">-</Button>
-                            <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" MinWidth="15"/>
+                            <TextBox ui:CueBannerService.CueBanner="Description" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" MinWidth="60"/>
                         </WrapPanel>
                         <ui:TagControl DockPanel.Dock="Right" />
                         <TextBlock />
