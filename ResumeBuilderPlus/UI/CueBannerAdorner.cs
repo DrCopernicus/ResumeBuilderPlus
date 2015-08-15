@@ -21,7 +21,7 @@ namespace ResumeBuilderPlus.UI
             contentPresenter.Content = cueBanner;
             contentPresenter.Opacity = 0.7;
             contentPresenter.Margin =
-               new Thickness(Control.Margin.Left + Control.Padding.Left,
+               new Thickness(3 + Control.Margin.Left + Control.Padding.Left,
                              Control.Margin.Top + Control.Padding.Top, 0, 0);
         }
 
