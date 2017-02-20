@@ -83,5 +83,23 @@
                 </DockPanel>
             </Grid>
         </Expander>
+        <Expander Header="Output">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Column="0" Grid.Row="0">Cover Letter</TextBlock>
+                <DockPanel Grid.Column="1" Grid.Row="0">
+                    <ComboBox ItemsSource="{Binding CoverLetterStyles}" SelectedItem="{Binding SelectedCoverLetterStyle, UpdateSourceTrigger=PropertyChanged}"/>
+                </DockPanel>
+            </Grid>
+        </Expander>
     </StackPanel>
 </UserControl>

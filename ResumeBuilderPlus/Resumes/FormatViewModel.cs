@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Media;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ResumeBuilderPlus.VVM;
+using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace ResumeBuilderPlus.Resumes
 {
@@ -105,6 +105,30 @@ namespace ResumeBuilderPlus.Resumes
             set
             {
                 _selectedLayoutStyle = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        private readonly ObservableCollection<string> _coverLetterStyles = new ObservableCollection<string>()
+        {
+            "no cover letter", "cover letter before resume", "cover letter after resume", "cover letter and resume separate"
+        };
+
+        [JsonIgnore]
+        public ObservableCollection<string> CoverLetterStyles
+        {
+            get { return _coverLetterStyles; }
+        }
+
+        private string _selectedCoverLetterStyle = "cover letter before resume";
+
+        public string SelectedCoverLetterStyle
+        {
+            get { return _selectedCoverLetterStyle; }
+            set
+            {
+                _selectedCoverLetterStyle = value;
                 OnPropertyChanged();
             }
         }
