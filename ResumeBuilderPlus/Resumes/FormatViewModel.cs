@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ResumeBuilderPlus.VVM;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 
@@ -110,20 +111,23 @@ namespace ResumeBuilderPlus.Resumes
         }
 
         [JsonIgnore]
-        private readonly ObservableCollection<string> _coverLetterStyles = new ObservableCollection<string>()
+        private readonly Dictionary<CoverLetterFormatType, string> _coverLetterStylesCaptions = new Dictionary<CoverLetterFormatType, string>()
         {
-            "no cover letter", "cover letter before resume", "cover letter after resume", "cover letter and resume separate"
+            {CoverLetterFormatType.NoCoverLetter, "no cover letter"},
+            {CoverLetterFormatType.BeforeResume, "cover letter before resume"},
+            {CoverLetterFormatType.AfterResume, "cover letter after resume"},
+            {CoverLetterFormatType.SeparateFiles, "cover letter and resume separate"}
         };
 
         [JsonIgnore]
-        public ObservableCollection<string> CoverLetterStyles
+        public Dictionary<CoverLetterFormatType, string> CoverLetterCaptions
         {
-            get { return _coverLetterStyles; }
+            get { return _coverLetterStylesCaptions; }
         }
 
-        private string _selectedCoverLetterStyle = "cover letter before resume";
+        private CoverLetterFormatType _selectedCoverLetterStyle = CoverLetterFormatType.NoCoverLetter;
 
-        public string SelectedCoverLetterStyle
+        public CoverLetterFormatType SelectedCoverLetterStyle
         {
             get { return _selectedCoverLetterStyle; }
             set

@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Printing\DocumentPrinter.cs" />
     <Compile Include="Qualifiers\Collections\ManipulatableCollection.cs" />
     <Compile Include="Qualifiers\Cvitem.cs" />
     <Compile Include="Qualifiers\Cvobject.cs" />
@@ -86,10 +87,11 @@
     <Compile Include="Qualifiers\Project.cs" />
     <Compile Include="Qualifiers\Descriptors\Tag.cs" />
     <Compile Include="Resumes\CoverLetter.cs" />
+    <Compile Include="Resumes\CoverLetterFormatType.cs" />
     <Compile Include="Resumes\Formatter.cs" />
     <Compile Include="Resumes\Personal.cs" />
     <Compile Include="Resumes\Resume.cs" />
-    <Compile Include="Resumes\ResumePrinter.cs" />
+    <Compile Include="Printing\ResumePrinter.cs" />
     <Compile Include="UI\CueBannerAdorner.cs" />
     <Compile Include="UI\CueBannerService.cs" />
     <Compile Include="UI\DescriptionList.xaml.cs">

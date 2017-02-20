@@ -97,7 +97,10 @@
                 
                 <TextBlock Grid.Column="0" Grid.Row="0">Cover Letter</TextBlock>
                 <DockPanel Grid.Column="1" Grid.Row="0">
-                    <ComboBox ItemsSource="{Binding CoverLetterStyles}" SelectedItem="{Binding SelectedCoverLetterStyle, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox ItemsSource="{Binding Path=CoverLetterCaptions}"
+                              DisplayMemberPath="Value"
+                              SelectedValuePath="Key"
+                              SelectedValue="{Binding Path=SelectedCoverLetterStyle, Mode=Default}"/>
                 </DockPanel>
             </Grid>
         </Expander>
