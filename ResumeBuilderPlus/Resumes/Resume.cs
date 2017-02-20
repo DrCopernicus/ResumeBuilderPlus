@@ -3,8 +3,6 @@ using ResumeBuilderPlus.Qualifiers;
 using ResumeBuilderPlus.Qualifiers.Collections;
 using ResumeBuilderPlus.VVM;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 
 namespace ResumeBuilderPlus.Resumes
@@ -154,74 +152,6 @@ namespace ResumeBuilderPlus.Resumes
 
                 return list;
             }
-        }
-
-        public string ToString(IEnumerable<string> relevantTags)
-        {
-            string ending;
-            using (StreamReader r = new StreamReader("ending.txt"))
-            {
-                ending = r.ReadToEnd();
-            }
-            return "\\documentclass[11pt,a4paper,sans]{moderncv}\n\\moderncvstyle{" + Format.SelectedLayoutStyle + "}\n"
-                + "\\definecolor{color0}{RGB}{" + Format.Color0.R + "," + Format.Color0.G + "," + Format.Color0.B + "}\n"
-                + "\\definecolor{color1}{RGB}{" + Format.Color1.R + "," + Format.Color1.G + "," + Format.Color1.B + "}\n"
-                + "\\definecolor{color2}{RGB}{" + Format.Color2.R + "," + Format.Color2.G + "," + Format.Color2.B + "}\n"
-                + "\\usepackage[scale=" + Format.Borders + "]{geometry}\n"
-                + "\\firstname{" + PersonalInfo.NameFirst + "}\n"
-                + "\\familyname{" + PersonalInfo.NameLast + "}\n"
-                + "\\begin{document}\n"
-                + "\\title{R\\'esum\\'e}\n"
-                + (PersonalInfo.AddressLocalDisplay || PersonalInfo.AddressRegionalDisplay ?
-                    "\\address{" + (PersonalInfo.AddressLocalDisplay ? PersonalInfo.AddressLocal : "") + "}{" + (PersonalInfo.AddressRegionalDisplay ? PersonalInfo.AddressRegional : "") + "}\n" : "")
-                + (PersonalInfo.PhoneDisplay ? "\\phone{" + PersonalInfo.Phone + "}\n" : "")
-                + (PersonalInfo.EmailDisplay ? "\\email{" + PersonalInfo.Email + "}\n" : "")
-                + (PersonalInfo.WebsiteDisplay ? "\\extrainfo{\\httplink{" + PersonalInfo.Website + "}}\n" : "")
-                + "\\makecvtitle\n"
-                + Parse(CvobjectType.Cventry, Format, Education, relevantTags, "Education") + "\n"
-                + Parse(CvobjectType.Cventry, Format, Experience, relevantTags, "Experience") + "\n"
-                + Parse(CvobjectType.Cvitem, Format, Projects, relevantTags, "Projects") + "\n"
-                + ParseCvitems(Skills, Format, "Skills") + "\n"
-                + ending + "\n"
-                + CoverLetter.Text + "\n"
-                + "\\makeletterclosing\n"
-                + "\\end{document}";
-        }
-
-        private string Parse(CvobjectType type, FormatViewModel format, IReadOnlyCollection<Cvobject> cventries, IEnumerable<string> relevantTags, string name)
-        {
-            if (cventries == null || cventries.Count <= 0)
-                return "";
-
-            string str = "\\section{" + name + "}\n";
-
-            return cventries.Where(cventry => cventry.IsRelevant(relevantTags)).Aggregate(str, (working, cventry) =>
-                working + cventry.ToString(type, format) + "\n");
-        }
-
-        private string ParseCvitems(ObservableCollection<Cvitem> cvitems, FormatViewModel format, string name)
-        {
-            if (cvitems == null || cvitems.Count <= 0)
-                return "";
-
-            string str = "\\section{"+name+"}\n";
-
-            Dictionary<string, List<string>> addedCvitems = new Dictionary<string, List<string>>();
-
-            foreach (var cvitem in cvitems.Where(cvitem => cvitem.Relevant))
-            {
-                if (!addedCvitems.ContainsKey(cvitem.Type))
-                    addedCvitems[cvitem.Type] = new List<string>();
-
-                addedCvitems[cvitem.Type].Add(cvitem.Text);
-            }
-
-            return addedCvitems.Aggregate(str, (working, category) => working + MakeCvitem(category.Key, string.Join(", ", category.Value)) + "\n");
-        }
-
-        private string MakeCvitem(string type, string text)
-        {
-            return "\\cvitem{" + type.LaTeXify() + "}{" + text.LaTeXify() + "}";
         }
     }
 }

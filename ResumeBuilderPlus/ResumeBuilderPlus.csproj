@@ -89,6 +89,7 @@
     <Compile Include="Resumes\Formatter.cs" />
     <Compile Include="Resumes\Personal.cs" />
     <Compile Include="Resumes\Resume.cs" />
+    <Compile Include="Resumes\ResumePrinter.cs" />
     <Compile Include="UI\CueBannerAdorner.cs" />
     <Compile Include="UI\CueBannerService.cs" />
     <Compile Include="UI\DescriptionList.xaml.cs">

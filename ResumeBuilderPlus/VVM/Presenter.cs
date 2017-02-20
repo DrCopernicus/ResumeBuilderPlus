@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using ResumeBuilderPlus.Resumes;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
-using Newtonsoft.Json;
-using ResumeBuilderPlus.Qualifiers;
-using ResumeBuilderPlus.Resumes;
 
 namespace ResumeBuilderPlus.VVM
 {
     public class Presenter : ObservableObject
     {
         private Resume _resume = new Resume();
+
+        [JsonIgnore]
+        private ResumePrinter _printer = new ResumePrinter();
 
         public Resume Resume
         {
@@ -70,7 +72,7 @@ namespace ResumeBuilderPlus.VVM
 
         public void Write()
         {
-            File.WriteAllText(@"output.tex", Resume.ToString(ParsedTags.Where(tag => tag.Bool).Select(tag => tag.Text)));
+            File.WriteAllText(@"output.tex", _printer.Print(Resume, ParsedTags.Where(tag => tag.Bool).Select(tag => tag.Text)));
         }
 
         public ICommand SaveCommand
