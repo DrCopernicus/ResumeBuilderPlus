@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ResumeBuilderPlus.Qualifiers;
 using ResumeBuilderPlus.Qualifiers.Collections;
 using ResumeBuilderPlus.VVM;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 
 namespace ResumeBuilderPlus.Resumes
 {
@@ -176,6 +176,7 @@ namespace ResumeBuilderPlus.Resumes
                     "\\address{" + (PersonalInfo.AddressLocalDisplay ? PersonalInfo.AddressLocal : "") + "}{" + (PersonalInfo.AddressRegionalDisplay ? PersonalInfo.AddressRegional : "") + "}\n" : "")
                 + (PersonalInfo.PhoneDisplay ? "\\phone{" + PersonalInfo.Phone + "}\n" : "")
                 + (PersonalInfo.EmailDisplay ? "\\email{" + PersonalInfo.Email + "}\n" : "")
+                + (PersonalInfo.WebsiteDisplay ? "\\extrainfo{\\httplink{" + PersonalInfo.Website + "}}\n" : "")
                 + "\\makecvtitle\n"
                 + Parse(CvobjectType.Cventry, Format, Education, relevantTags, "Education") + "\n"
                 + Parse(CvobjectType.Cventry, Format, Experience, relevantTags, "Experience") + "\n"

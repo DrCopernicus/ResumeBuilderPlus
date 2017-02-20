@@ -128,5 +128,30 @@ namespace ResumeBuilderPlus.Resumes
                 OnPropertyChanged();
             }
         }
+
+        private string _website = "";
+
+        public string Website
+        {
+            get { return _website; }
+            set
+            {
+                _website = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _websiteDisplay = true;
+
+        public bool WebsiteDisplay
+        {
+
+            get { return _websiteDisplay; }
+            set
+            {
+                _websiteDisplay = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

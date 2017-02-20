@@ -103,6 +103,9 @@
     <Compile Include="UI\InsertTemplateTextDialog.xaml.cs">
       <DependentUpon>InsertTemplateTextDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\FormattingControl.xaml.cs">
+      <DependentUpon>FormattingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\LockableCheckbox.xaml.cs">
       <DependentUpon>LockableCheckbox.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
     <Page Include="UI\InsertTemplateTextDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\FormattingControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\LockableCheckbox.xaml">
       <SubType>Designer</SubType>
