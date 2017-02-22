@@ -77,6 +77,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Printing\DocumentPrinter.cs" />
+    <Compile Include="Printing\CoverLetterWriter.cs" />
     <Compile Include="Qualifiers\Collections\ManipulatableCollection.cs" />
     <Compile Include="Qualifiers\Cvitem.cs" />
     <Compile Include="Qualifiers\Cvobject.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="Resumes\Formatter.cs" />
     <Compile Include="Resumes\Personal.cs" />
     <Compile Include="Resumes\Resume.cs" />
-    <Compile Include="Printing\ResumePrinter.cs" />
+    <Compile Include="Printing\ResumeWriter.cs" />
     <Compile Include="UI\CueBannerAdorner.cs" />
     <Compile Include="UI\CueBannerService.cs" />
     <Compile Include="UI\DescriptionList.xaml.cs">

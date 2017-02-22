@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ResumeBuilderPlus.Printing;
 using ResumeBuilderPlus.Resumes;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +14,7 @@ namespace ResumeBuilderPlus.VVM
         private Resume _resume = new Resume();
 
         [JsonIgnore]
-        private ResumePrinter _printer = new ResumePrinter();
+        private DocumentPrinter _printer = new DocumentPrinter();
 
         public Resume Resume
         {
@@ -72,7 +73,7 @@ namespace ResumeBuilderPlus.VVM
 
         public void Write()
         {
-            File.WriteAllText(@"output.tex", _printer.Print(Resume, ParsedTags.Where(tag => tag.Bool).Select(tag => tag.Text)));
+            _printer.PrintDocuments(Resume, Resume.Format.SelectedCoverLetterStyle, ParsedTags.Where(tag => tag.Bool).Select(tag => tag.Text));
         }
 
         public ICommand SaveCommand
