@@ -19,6 +19,7 @@
                     <DockPanel>
                         <WrapPanel>
                             <Button Command="{Binding RemoveCommand}" Width="25">-</Button>
+                            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Relevant, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox ui:CueBannerService.CueBanner="Description" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" MinWidth="60"/>
                         </WrapPanel>
                         <ui:TagControl DockPanel.Dock="Right" />

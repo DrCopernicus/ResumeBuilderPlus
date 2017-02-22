@@ -36,6 +36,18 @@ namespace ResumeBuilderPlus.Qualifiers.Descriptors
             return Text;
         }
 
+        private bool _relevant = true;
+
+        public bool Relevant
+        {
+            get { return _relevant; }
+            set
+            {
+                _relevant = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Description> Parent { get; set; }
         public ICommand RemoveCommand { get { return new DelegateCommand(RemoveFromCommand); } }
         public void RemoveFromCommand()

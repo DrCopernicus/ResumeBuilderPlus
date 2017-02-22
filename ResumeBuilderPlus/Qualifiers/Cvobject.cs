@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using ResumeBuilderPlus.Qualifiers.Descriptors;
+﻿using ResumeBuilderPlus.Qualifiers.Descriptors;
 using ResumeBuilderPlus.Resumes;
 using ResumeBuilderPlus.VVM;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ResumeBuilderPlus.Qualifiers
 {
@@ -46,11 +47,13 @@ namespace ResumeBuilderPlus.Qualifiers
 
         protected string ParseDescription(ObservableCollection<Description> description)
         {
-            if (description.Count <= 0)
+            var relevantDescriptions = description.Where(desc => desc.Relevant).ToList();
+
+            if (!relevantDescriptions.Any())
                 return "";
 
             return "\n\\begin{itemize}\n"
-                   + "\\item " + string.Join("\n\\item ", description)
+                   + "\\item " + string.Join("\n\\item ", relevantDescriptions)
                    + "\n\\end{itemize}\n";
         }
 
