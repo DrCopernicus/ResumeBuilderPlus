@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using ResumeBuilderPlus.Qualifiers.Collections;
+using ResumeBuilderPlus.Qualifiers.Descriptors;
+using ResumeBuilderPlus.Resumes;
+using ResumeBuilderPlus.VVM;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using ResumeBuilderPlus.Qualifiers.Collections;
-using ResumeBuilderPlus.Qualifiers.Descriptors;
-using ResumeBuilderPlus.Resumes;
-using ResumeBuilderPlus.VVM;
 
 namespace ResumeBuilderPlus.Qualifiers
 {
@@ -79,9 +79,9 @@ namespace ResumeBuilderPlus.Qualifiers
                 case CvobjectType.Cventry:
                     return MakeCventry(format, Years, Title, Institution, "", "", ParseDescription(Description));
                 case CvobjectType.Cvitem:
-                    return MakeCvitem(format, Title + (format.ProjectYearsNewline ? "\\\\" : " ") + Years, ParseDescription(Description));
+                    return MakeCvitem(format, Title + (Years == "" ? "" : (format.ProjectYearsNewline ? "\\\\" : " ") + Years), ParseDescription(Description));
                 default:
-                    throw new InvalidEnumArgumentException(@"Unhandled value: " + type.ToString());
+                    throw new InvalidEnumArgumentException(@"Unhandled value: " + type);
             }
         }
 
